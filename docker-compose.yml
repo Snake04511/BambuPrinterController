@@ -1,0 +1,26 @@
+services:
+  printerdash:
+    build: .
+    image: printerdash:latest
+    container_name: printerdash
+    # Back after a crash and after a reboot (Docker starts it with the host); only a manual
+    # "docker stop" keeps it down.
+    restart: unless-stopped
+    # An autoheal container (if you run one) restarts it when the health check fails
+    # (hung app that still runs).
+    labels:
+      autoheal: "true"
+    stop_grace_period: 15s
+    # Disk: Docker cannot cap a volume on this host (overlay2 on ext4, no quotas); the app
+    # keeps /data under its own limit instead (Settings > Storage, default 50 GB).
+    ports:
+      - "8090:8090"
+    environment:
+      TZ: Europe/Budapest
+    volumes:
+      - printerdash_data:/data # SQLite (settings, secrets, sessions), caches
+      - ./backups:/backups # daily backups (next to this file)
+
+volumes:
+  printerdash_data:
+    name: printerdash_data
