@@ -197,5 +197,5 @@ Generate the panel key in **Settings → ESP32 panel** and send it as `X-API-Key
 ## Notes
 
 - **Commands:** they reach the real printer. Moves are refused by the backend while printing.
-- **The P1S idle part fan:** it does not spin while the printer is idle. This is firmware behaviour (Bambu Studio does the same).
+- **The P1S idle part fan:** it does not spin while the printer is idle. This is firmware behaviour (Bambu Studio does the same, or just my printer is broken).
 - **Affiliation:** not affiliated with Bambu Lab or Obico.
